@@ -79,7 +79,7 @@ namespace svpp_lab2
             }
             set
             {
-               flag = value;
+                flag = value;
             }
         }
 
@@ -185,7 +185,7 @@ namespace svpp_lab2
                 for (int k = 0; k <= n; k++)
                 {
                     //s += (Math.Cos((k * Math.PI) / 4) / calc_factorial(k)) * Math.Pow(i, k);
-                    s += (Math.Pow((-1), k)) * ((Math.Pow(i, 2 * k)) / calc_factorial(2*k)); //вариант 7
+                    s += (Math.Pow((-1), k)) * ((Math.Pow(i, 2 * k)) / calc_factorial(2 * k)); //вариант 7
                 }
 
                 obj.S = Math.Round(s, 3);
@@ -220,8 +220,8 @@ namespace svpp_lab2
         //             p *= Math.Cos((k * Math.PI )/ 4) * i / k;
         //            s += p;
         //            // p *= (((Math.Pow((-1), k)) * (Math.Pow((Math.PI / 4), 2 * k)) * (Math.Pow(i, 2 * k))) / calc_factorial(2*k)) * i / k;
-                   
-               
+
+
         //          // s += ((((Math.Cos((k * Math.PI) / 4)))) / (calc_factorial(k))) * Math.Pow(i, k);
         //            //s += ((((Math.Cos((k * Math.PI) / 4))))) / (((k-1) * k) * Math.Pow(i, k));
         //        }

@@ -5,8 +5,107 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:svpp_lab2_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Lab2.2" Height="600" Width="800">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="Background" Value="Pink"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type ComboBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="Background" Value="Pink"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <ControlTemplate x:Key="ErrorTempl">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderThickness="2" BorderBrush="Red">
+                    <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                </Border>
+                <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <Grid x:Name="myGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35*"></ColumnDefinition>
+            <ColumnDefinition  Width="60*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0"  Margin="10">
+           
+                <Label Content="Добавление нового сотрудника:" FontSize="16" Margin="10, 10, 10, 0"/>
+
+                <Label Content="ФИО:" FontSize="14" Margin="10, 0, 10, 0"/>
+                <TextBox x:Name="tbName"  Text="{Binding Path=Name, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" HorizontalAlignment="Left" Width="200" Margin="10, 0, 0,0"  />
+
+                <Label Content="Заработная плата:"  FontSize="14" Margin="10, 0, 10, 0"/>
+                <TextBox x:Name="tbSalary" Text="{Binding Path=Salary, ValidatesOnExceptions=True}"  Validation.ErrorTemplate="{StaticResource ErrorTempl}"  HorizontalAlignment="Left" Width="200" Margin="10, 0, 0,0"/>
+
+                <Label  Content="Должность:" FontSize="14" Margin="10, 0, 10, 0"/>
+                <ComboBox x:Name="cbOccup" IsEditable="True" IsReadOnly="False" Text="{Binding Path=Occup, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Width="200" Margin="10, 0, 0,0" >
+                <TextBlock>Управляющий</TextBlock>
+                <TextBlock>Инженер</TextBlock>
+                <TextBlock>Бухгалтер</TextBlock>
+                <TextBlock>Менеджер</TextBlock>
+                <TextBlock>Электрик</TextBlock>
+                <TextBlock>Уборщик</TextBlock>
+                <TextBlock>Юрист</TextBlock>
+                <TextBlock >Водитель</TextBlock>
+                <Button x:Name="addOccup" Background="LightGray" BorderThickness="0" Width="210" Click="Add_Occup_Click" >Добавить...</Button>
+            </ComboBox>
+
+            <Label  Content="Город:" FontSize="14" Margin="10, 0, 10, 0"/>
+            <ComboBox x:Name="cbCity" IsEditable="True" IsReadOnly="False" Text="{Binding Path=City, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Width="200" Margin="10, 0, 0,0" >
+                <TextBlock>Минск</TextBlock>
+                <TextBlock>Гродно</TextBlock>
+                <TextBlock>Гомель</TextBlock>
+                <TextBlock>Витебск</TextBlock>
+                <TextBlock>Могилев</TextBlock>
+                <TextBlock>Брест</TextBlock>
+                <TextBlock>Борисов</TextBlock>
+                <TextBlock>Осиповичи</TextBlock>
+                <Button x:Name="addCity" Background="LightGray" BorderThickness="0" Width="210" Click="Add_City_Click" >Добавить...</Button>
+            </ComboBox>
+
+            <Label  Content="Улица:" FontSize="14" Margin="10, 0, 10, 0"/>
+            <ComboBox x:Name="cbStreet" IsEditable="True" IsReadOnly="False" Text="{Binding Path=Street, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Width="200" Margin="10, 0, 0, 0" >
+                <TextBlock>Пономаренко</TextBlock>
+                <TextBlock>Федорова</TextBlock>
+                <TextBlock>Сухаревская</TextBlock>
+                <TextBlock>Аэродромная</TextBlock>
+                <TextBlock>Лобанка</TextBlock>
+                <TextBlock>Козлова</TextBlock>
+                <TextBlock>Чижевских</TextBlock>
+                <TextBlock>Казинца</TextBlock>
+                <Button x:Name="addStreet" Background="LightGray" BorderThickness="0" Width="210" Click="Add_Street_Click" >Добавить...</Button>
+            </ComboBox>
+
+            <Label Content="Дом:" FontSize="14" Margin="10, 10, 10, 0"/>
+            <TextBox x:Name="tbBuild"  Text="{Binding Path=Build, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" HorizontalAlignment="Left" Width="200" Margin="10, 0, 0,0" />
+
+            <Button x:Name="add" Content="Добавить сотрудника" FontSize="14" Background="LightGreen" Margin="10, 20, 10, 10" Width="180" Click="AddPerson_Click"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="saveToFile" Content="Сохранить в файл" Background="LightGray" Margin="10, 10, 5, 10"  Width="120" Click="Save_to_file"/>
+                <Button x:Name="downloadFromFile" Content="Извлечь из файла" Background="LightGray" Margin="10" Width="120" Click="Download_from_file"/>
+            </StackPanel>
+            
+            <Button x:Name="clear" Content="Очистить поля ввода" Background="Pink" Margin="20" Width="130" Click="Clear_Click"/>
+            <!--<Button x:Name="clearList" Content="Очистить список" Background="Pink"  Width="130" />-->
+        </StackPanel>
+
+        <StackPanel Grid.Column="1"  Margin="10">
+            <Label Content="Список сотрудников и их данные:" FontSize="16" Margin="10"/>
+            <ListBox  x:Name="ResultBox" ItemsSource="{Binding}" Height="350"/>
+        </StackPanel>
+
     </Grid>
 </Window>

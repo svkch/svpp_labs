@@ -168,7 +168,6 @@ namespace svpp_lab2_2
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            Button clearButton = (Button)sender;
             tbName.Clear();
             tbSalary.Clear();
             cbOccup.Text = string.Empty;
@@ -189,12 +188,11 @@ namespace svpp_lab2_2
 
             try
             {
-                cbOccup.Items.Add(cbOccup.Text);
-
-                if (string.IsNullOrEmpty(cbOccup.Text))
+                if (string.IsNullOrEmpty(cbOccup.Text)) //проверяем на заполнение
                 {
                     throw new Exception("Добавляемая строка не может быть пустой!");
                 }
+                cbOccup.Items.Insert(cbOccup.Items.Count-1,cbOccup.Text); //заполняем
 
             }
             catch (Exception ex)
@@ -209,12 +207,11 @@ namespace svpp_lab2_2
 
             try
             {
-                cbCity.Items.Add(cbCity.Text);
-
                 if (string.IsNullOrEmpty(cbCity.Text))
                 {
                     throw new Exception("Добавляемая строка не может быть пустой!");
                 }
+                cbCity.Items.Insert(cbCity.Items.Count-1,cbCity.Text);
 
             }
             catch (Exception ex)
@@ -228,12 +225,11 @@ namespace svpp_lab2_2
 
             try
             {
-                cbStreet.Items.Add(cbStreet.Text);
-
                 if (string.IsNullOrEmpty(cbStreet.Text))
                 {
                     throw new Exception("Добавляемая строка не может быть пустой!");
                 }
+                cbStreet.Items.Insert(cbStreet.Items.Count-1,cbStreet.Text);
 
             }
             catch (Exception ex)
@@ -257,24 +253,12 @@ namespace svpp_lab2_2
         {
             string[] lines = File.ReadAllLines("Workers.txt"); //читаю весь файл целиком в массив
             foreach (string str_for_reading in lines) { 
-                //сюда запишется прочитанная строка
+
 
                     people.Add(str_for_reading);
-            
-                // что-нибудь делаем с прочитанной строкой s
+
             }
 
-            //string str_for_reading; //сюда запишется прочитанная строка
-            //using (var myStreamRead = new StreamReader("Workers.txt"))
-            //{
-            //    while ((str_for_reading = myStreamRead.ReadLine()) != null)
-            //    {
-            //       str_for_reading = myStreamRead.ReadLine();   //сюда запишется прочитанная строка
-
-            //        people.Add(str_for_reading);
-
-            //    }
-            //}
 
         }
     }

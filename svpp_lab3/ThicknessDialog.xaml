@@ -1,0 +1,11 @@
+﻿<Window x:Class="svpp_lab3.ThicknessDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Выбор толщины линии" Height="150" Width="300">
+    <Grid>
+        <Label Content="Толщина линии:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
+        <TextBox x:Name="ThicknessTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" Width="260"/>
+        <Button Content="OK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10,10" Click="ok_button_Click"/>
+        <Button Content="Отмена" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,90,10" Click="cancel_button_Click"/>
+    </Grid>
+</Window>

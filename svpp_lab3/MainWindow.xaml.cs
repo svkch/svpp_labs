@@ -189,7 +189,7 @@ namespace svpp_lab3
                 if (saveFileDialog.ShowDialog() == true)
                 {
                     save_to_file(saveFileDialog.FileName);
-                    this.Title = $"Graphics Editor - {Path.GetFileName(saveFileDialog.FileName)}";
+                    this.Title = $"Графический редактор - {Path.GetFileName(saveFileDialog.FileName)}";
                 }
             }
             else
@@ -208,7 +208,7 @@ namespace svpp_lab3
             if (openFileDialog.ShowDialog() == true)
             {
                 load_from_file(openFileDialog.FileName);
-                this.Title = $"Graphics Editor - {Path.GetFileName(openFileDialog.FileName)}";
+                this.Title = $"Графический редактор - {Path.GetFileName(openFileDialog.FileName)}";
             }
         }
     }

@@ -6,45 +6,52 @@
         xmlns:local="clr-namespace:svpp_lab3"
         mc:Ignorable="d"
         Title="Lab3" Height="450" Width="800" >
-    <Grid x:Name="MyGrid" >
-        
-        <TextBlock x:Name="status"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"/>
-        <StackPanel>
-            <Menu Grid.Row="0" Height="20" VerticalAlignment="Top">
-                <MenuItem Header="Файл">
-                    <MenuItem Header="Сохранить" Click="save_menuItem_Click"></MenuItem>
-                    <MenuItem Header="Открыть" Click="open_menuItem_Click"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="Изменить">
-                    <MenuItem Header="Толщина линии фигуры" Click="ln_thick_menuItem_Click"></MenuItem>
-                    <MenuItem Header="Цвет линии фигуры" Click="chng_clr_border_Click"></MenuItem>
-                    <MenuItem Header="Цвет фона фигуры" Click="chng_clr_back_Click"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="О программе" Click="about_menuItem_Click"></MenuItem>
-            </Menu>
-    
-            <ToolBar Grid.Row="1"  Height="60" VerticalAlignment="Top">
-                <StackPanel Width="150">
-                    <Label Content="Толщина линии" FontWeight="Bold"  HorizontalAlignment="Center"></Label>
-                    <Slider x:Name="slider_thickness"  Width="80" TickPlacement="BottomRight" TickFrequency="1" HorizontalAlignment="Center" ValueChanged="thick_slider_ValueChanged"></Slider>
-                </StackPanel>
-                <StackPanel Width="150" >
-                    <Label Content="Цвет линии" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-                    <Button x:Name="chng_clr_border" Content="Изменить"  Height="20" Width="100" Click="chng_clr_border_Click"/>
-                   
-                </StackPanel>
-                <StackPanel Width="150">
-                    <Label Content="Цвет фона" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-                    <Button x:Name="chng_clr_back" Content="Изменить" Height="20" Width="100" Click="chng_clr_back_Click"/>
 
-                </StackPanel>
-                <Button Content="Сохранить" FontWeight="Bold" Width="100" Click="save_menuItem_Click"></Button>
-                <Button Content="Открыть" FontWeight="Bold" Width="100" Click="open_menuItem_Click"></Button>
-                <Button Content="О программе" FontWeight="Bold" Width="100" Click="about_menuItem_Click"></Button>
-            </ToolBar>
-            <Canvas Name="DrawingCanvas" Background="White" Height="300" MouseLeftButtonDown="DrawHexagon"/>
+    <DockPanel>
+        <Menu  DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Сохранить" Command="Save"></MenuItem>
+                <!--Click="save_menuItem_Click"-->
+                <MenuItem Header="Открыть" Command="Open"></MenuItem>
+                <!--Click="open_menuItem_Click"-->
+            </MenuItem>
+            <MenuItem Header="Изменить">
+                <MenuItem Header="Толщина линии фигуры" Click="ln_thick_menuItem_Click"></MenuItem>
+                <MenuItem Header="Цвет линии фигуры" Click="chng_clr_border_Click"></MenuItem>
+                <MenuItem Header="Цвет фона фигуры" Click="chng_clr_back_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="О программе" Click="about_menuItem_Click"></MenuItem>
+        </Menu>
 
-        </StackPanel>
-        
-    </Grid>
+        <ToolBar DockPanel.Dock="Top">
+
+            <StackPanel Width="150">
+                <Label Content="Толщина линии" FontWeight="Bold"  HorizontalAlignment="Center"></Label>
+                <Slider x:Name="slider_thickness"  Width="80" TickPlacement="BottomRight" TickFrequency="1" HorizontalAlignment="Center" ValueChanged="thick_slider_ValueChanged"></Slider>
+            </StackPanel>
+            <StackPanel Width="150" >
+                <Label Content="Цвет линии" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                <Button x:Name="chng_clr_border" Content="Изменить"  Height="20" Width="100" Click="chng_clr_border_Click"/>
+
+            </StackPanel>
+            <StackPanel Width="150">
+                <Label Content="Цвет фона" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                <Button x:Name="chng_clr_back" Content="Изменить" Height="20" Width="100" Click="chng_clr_back_Click"/>
+
+            </StackPanel>
+            <Button Content="Сохранить" FontWeight="Bold" Width="100" Click="Save_Executed"></Button>
+            <Button Content="Открыть" FontWeight="Bold" Width="100" ></Button>
+            <!--Click="open_menuItem_Click"-->
+            <Button Content="О программе" FontWeight="Bold" Width="100" Click="about_menuItem_Click"></Button>
+        </ToolBar>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="DrawingCanvas"  Grid.Row="1" Background="White" MouseLeftButtonDown="DrawHexagon" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="status"  Grid.Row="1"   Background="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+
+        </Grid>
+    </DockPanel>
 </Window>

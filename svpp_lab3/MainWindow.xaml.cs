@@ -29,6 +29,16 @@ namespace svpp_lab3
         public MainWindow()
         {
             InitializeComponent();
+            CommandBinding save_binding = new CommandBinding(ApplicationCommands.Save);
+            save_binding.Executed += Save_Executed;
+            save_binding.CanExecute += Save_CanExecute;
+            this.CommandBindings.Add(save_binding);
+
+            CommandBinding open_binding = new CommandBinding(ApplicationCommands.Open);
+            open_binding.Executed += Open_Executed;
+            //open_binding.CanExecute += Open_CanExecute;
+            this.CommandBindings.Add(open_binding);
+
         }
 
         private void DrawHexagon(object sender, MouseButtonEventArgs e)
@@ -37,12 +47,15 @@ namespace svpp_lab3
 
             status.Text = $" Координаты фигуры:     x: {position.X},   y: {position.Y}";
 
-            double side = 50;
-            double height = side * Math.Sqrt(3) / 2;
 
-            Polygon polygon = new Polygon();
+            if (position.Y > 38) //чтобы не залазило на ToolBar
+            {
+                double side = 50;
+                double height = side * Math.Sqrt(3) / 2;
 
-            polygon.Points = new PointCollection()
+                Polygon polygon = new Polygon();
+
+                polygon.Points = new PointCollection()
             {
 
                 new Point(position.X - side, position.Y - height / 2),
@@ -52,16 +65,17 @@ namespace svpp_lab3
                 new Point(position.X + side, position.Y - height / 2),
 
                 new Point(position.X + side / 2 , position.Y + height / 16),
-                new Point(position.X - side / 2, position.Y + height / 16) 
+                new Point(position.X - side / 2, position.Y + height / 16)
             };
 
-            polygon.Stroke = new SolidColorBrush(ln_color);
-            polygon.StrokeThickness = slider_thickness.Value;
-            polygon.StrokeThickness = ln_thickness;
-            polygon.Fill = new SolidColorBrush(bck_color);
+                polygon.Stroke = new SolidColorBrush(ln_color);
+                polygon.StrokeThickness = slider_thickness.Value;
+                polygon.StrokeThickness = ln_thickness;
+                polygon.Fill = new SolidColorBrush(bck_color);
 
-            DrawingCanvas.Children.Add(polygon);
-            figures.Add(polygon);
+                DrawingCanvas.Children.Add(polygon);
+                figures.Add(polygon);
+            }
         }
 
         private void thick_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -120,6 +134,12 @@ namespace svpp_lab3
             return Color.FromArgb(a, r, g, b);
         }
 
+        private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = DrawingCanvas.Children.Count != 0;
+        }
+
+
         private void save_to_file(string filePath)
         {
             using (StreamWriter writer = new StreamWriter(filePath))
@@ -143,6 +163,31 @@ namespace svpp_lab3
                 }
             }
         }
+        private void Save_Executed(object sender, RoutedEventArgs e)
+        {
+            if (figures.Count > 0)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "Text Files|*.txt"
+                };
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    save_to_file(saveFileDialog.FileName);
+                    this.Title = $"Графический редактор - {Path.GetFileName(saveFileDialog.FileName)}";
+                }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Нет фигур для сохранения!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        //private void Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        //{
+        //    e.CanExecute = DrawingCanvas.Children.Count != 0;
+        //}
 
         private void load_from_file(string filePath)
         {
@@ -177,28 +222,7 @@ namespace svpp_lab3
             }
         }
 
-        private void save_menuItem_Click(object sender, RoutedEventArgs e)
-        {
-            if (figures.Count > 0)
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog
-                {
-                    Filter = "Text Files|*.txt"
-                };
-
-                if (saveFileDialog.ShowDialog() == true)
-                {
-                    save_to_file(saveFileDialog.FileName);
-                    this.Title = $"Графический редактор - {Path.GetFileName(saveFileDialog.FileName)}";
-                }
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Нет фигур для сохранения!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        private void open_menuItem_Click(object sender, RoutedEventArgs e)
+        private void Open_Executed(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {

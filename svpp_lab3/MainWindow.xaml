@@ -49,7 +49,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Canvas x:Name="DrawingCanvas"  Grid.Row="1" Background="White" MouseLeftButtonDown="DrawHexagon" Grid.ColumnSpan="2"/>
+            <Canvas x:Name="DrawingCanvas" ClipToBounds="True" Grid.Row="1" Background="White" MouseLeftButtonDown="DrawHexagon" Grid.ColumnSpan="2"/>
             <TextBlock x:Name="status"  Grid.Row="1"   Background="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
 
         </Grid>

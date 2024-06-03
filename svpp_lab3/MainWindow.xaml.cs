@@ -18,7 +18,6 @@ using System.Windows.Ink;
 using svpp_lab3;
 
 
-
 namespace svpp_lab3
 {
 

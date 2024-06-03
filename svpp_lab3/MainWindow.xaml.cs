@@ -13,6 +13,10 @@ using Path = System.IO.Path;
 using Point = System.Windows.Point;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using static System.Net.WebRequestMethods;
+using System.Windows.Ink;
+using svpp_lab3;
+
 
 
 namespace svpp_lab3
@@ -25,10 +29,15 @@ namespace svpp_lab3
         public double ln_thickness = 0.5;
 
         private List<Shape> figures = new List<Shape>();
+        private MainViewModel viewModel;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            viewModel = new MainViewModel();
+            this.DataContext = viewModel;
+
             CommandBinding save_binding = new CommandBinding(ApplicationCommands.Save);
             save_binding.Executed += Save_Executed;
             save_binding.CanExecute += Save_CanExecute;
@@ -47,47 +56,48 @@ namespace svpp_lab3
 
             status.Text = $" Координаты фигуры:     x: {position.X},   y: {position.Y}";
 
-
             if (position.Y > 38) //чтобы не залазило на ToolBar
             {
                 double side = 50;
                 double height = side * Math.Sqrt(3) / 2;
 
-                Polygon polygon = new Polygon();
+                Polygon polygon = new Polygon
+                {
+                    Points = new PointCollection
+                    {
+                        new Point(position.X - side, position.Y - height / 2),
+                        new Point(position.X - side / 2, position.Y - height),
+                        new Point(position.X + side / 2, position.Y - height),
+                        new Point(position.X + side, position.Y - height / 2),
+                        new Point(position.X + side / 2, position.Y + height / 16),
+                        new Point(position.X - side / 2, position.Y + height / 16)
+                    },
+                    Stroke = new SolidColorBrush(ln_color),
+                    StrokeThickness = viewModel.LineThickness, // Используем толщину линии из ViewModel
+                    Fill = new SolidColorBrush(bck_color)
+                };
 
-                polygon.Points = new PointCollection()
-            {
+                //polygon.Stroke = new SolidColorBrush(ln_color);
+                //polygon.StrokeThickness = slider_thickness.Value;
+                //polygon.StrokeThickness = ln_thickness;
+                //polygon.Fill = new SolidColorBrush(bck_color);
 
-                new Point(position.X - side, position.Y - height / 2),
-                new Point(position.X - side / 2, position.Y - height),
-                new Point(position.X + side / 2, position.Y - height),
-
-                new Point(position.X + side, position.Y - height / 2),
-
-                new Point(position.X + side / 2 , position.Y + height / 16),
-                new Point(position.X - side / 2, position.Y + height / 16)
-            };
-
-                polygon.Stroke = new SolidColorBrush(ln_color);
-                polygon.StrokeThickness = slider_thickness.Value;
-                polygon.StrokeThickness = ln_thickness;
-                polygon.Fill = new SolidColorBrush(bck_color);
 
                 DrawingCanvas.Children.Add(polygon);
                 figures.Add(polygon);
             }
         }
 
-        private void thick_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            foreach (var child in DrawingCanvas.Children)
-            {
-                if (child is Polygon)
-                {
-                    ((Polygon)child).StrokeThickness = slider_thickness.Value;
-                }
-            }
-        }
+        //private void thick_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //{
+        //    foreach (var child in DrawingCanvas.Children)
+        //    {
+        //        if (child is Polygon)
+        //        {
+        //            ((Polygon)child).StrokeThickness = slider_thickness.Value;
+        //        }
+        //    }
+        //}
 
         private void chng_clr_back_Click(object sender, RoutedEventArgs e)
         {

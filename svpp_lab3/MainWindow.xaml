@@ -27,7 +27,7 @@
 
             <StackPanel Width="150">
                 <Label Content="Толщина линии" FontWeight="Bold"  HorizontalAlignment="Center"></Label>
-                <Slider x:Name="slider_thickness"  Width="80" TickPlacement="BottomRight" TickFrequency="1" HorizontalAlignment="Center" ValueChanged="thick_slider_ValueChanged"></Slider>
+                <Slider x:Name="slider_thickness" Value="{Binding LineThickness, Mode=TwoWay}" Width="80" TickPlacement="BottomRight" TickFrequency="1" HorizontalAlignment="Center" ></Slider>
             </StackPanel>
             <StackPanel Width="150" >
                 <Label Content="Цвет линии" FontWeight="Bold" HorizontalAlignment="Center"></Label>
@@ -40,7 +40,7 @@
 
             </StackPanel>
             <Button Content="Сохранить" FontWeight="Bold" Width="100" Click="Save_Executed"></Button>
-            <Button Content="Открыть" FontWeight="Bold" Width="100" ></Button>
+            <Button Content="Открыть" FontWeight="Bold" Width="100" Click="Open_Executed" ></Button>
             <!--Click="open_menuItem_Click"-->
             <Button Content="О программе" FontWeight="Bold" Width="100" Click="about_menuItem_Click"></Button>
         </ToolBar>

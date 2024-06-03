@@ -28,7 +28,7 @@
             <StackPanel Width="150">
                 <Label Content="Толщина линии" FontWeight="Bold"  HorizontalAlignment="Center"></Label>
                 <Slider x:Name="slider_thickness" Value="{Binding LineThickness, Mode=TwoWay}" Width="80" TickPlacement="BottomRight" IsSnapToTickEnabled="True" TickFrequency="1" HorizontalAlignment="Center" ></Slider>
-                <Label HorizontalAlignment="Center" Content="{Binding ElementName=slider_thickness, Path=Value}"/>
+                <Label HorizontalAlignment="Center" Content="{Binding ElementName=slider_thickness, Path=Value}" />
             </StackPanel>
             <StackPanel Width="150" >
                 <Label Content="Цвет линии" FontWeight="Bold" HorizontalAlignment="Center"></Label>

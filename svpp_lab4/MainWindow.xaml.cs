@@ -81,7 +81,7 @@ namespace svpp_lab4
                     progressBar.Value = (i + 1) * 100 / parts;
                 });
 
-                Thread.Sleep(100); //моделируем долгие вычисления
+                Thread.Sleep(100); //имитируем долгие вычисления
 
             }
 
@@ -104,7 +104,7 @@ namespace svpp_lab4
                 result += 0.25 * Math.Pow(x, 4) * h;
 
                 (sender as BackgroundWorker).ReportProgress((i + 1) * 100 / parts);
-                Thread.Sleep(100); //моделируем долгие вычисления
+                Thread.Sleep(100); //имитируем долгие вычисления
             }
 
             e.Result = result;

@@ -52,13 +52,14 @@ namespace svpp_lab5
             double newY = centerY + radius * Math.Sin(radians);
 
             Position = new Point(newX, newY);
+          
         }
-     
+        private static readonly Random RandomGenerator = new Random();
         public void Reset()
         {
             _angle = -90;
             Position = InitialPosition;
-            Speed = new Random().Next(1, 20);
+            Speed = RandomGenerator.Next(1, 20); 
         }
 
         public static readonly RoutedEvent SpeedClickedEvent =

@@ -53,11 +53,12 @@ namespace svpp_lab5
 
             Position = new Point(newX, newY);
         }
-
+     
         public void Reset()
         {
             _angle = -90;
             Position = InitialPosition;
+            Speed = new Random().Next(1, 20);
         }
 
         public static readonly RoutedEvent SpeedClickedEvent =

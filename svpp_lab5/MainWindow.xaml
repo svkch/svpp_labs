@@ -20,8 +20,8 @@
     </StackPanel>
 
     <Canvas Name="RaceTrack" Background="Green" ClipToBounds="True" Grid.Row="1">
-        <local:HorseMovement x:Name="Horse1" Speed="2" Position="0,5" SpeedClicked="Horse_SpeedClicked" PositionClicked="Horse_PositionClicked"/>
-        <local:HorseMovement x:Name="Horse2" Speed="0.5" Position="0,70" SpeedClicked="Horse_SpeedClicked" PositionClicked="Horse_PositionClicked"/>
+        <local:HorseMovement x:Name="Horse1"  SpeedClicked="Horse_SpeedClicked" PositionClicked="Horse_PositionClicked"/>
+        <local:HorseMovement x:Name="Horse2"  SpeedClicked="Horse_SpeedClicked" PositionClicked="Horse_PositionClicked"/>
     </Canvas>
 
     <TextBlock Name="InfoTextBlock" Grid.Row="2" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>

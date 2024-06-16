@@ -1,0 +1,40 @@
+﻿<Window x:Class="svpp_lab7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:svpp_lab7"
+        mc:Ignorable="d"
+        Title="Lab7" Height="300" Width="600">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="5,2"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dGrid" Grid.Column="1" ItemsSource="{Binding}" AutoGenerateColumns="False" LoadingRow="dGrid_LoadingRow" RowHeaderWidth="50">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*">
+                <DataGridTextColumn.CellStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Right"/>
+                    </Style>
+                </DataGridTextColumn.CellStyle>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="Страна" Binding="{Binding Country}"/>
+            <DataGridTextColumn Header="Цвет" Binding="{Binding Color}"/>
+            <DataGridTextColumn Header="Стоимость" Binding="{Binding FlowerPrice}"/>
+        </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel x:Name="stackButtons">
+            <Button x:Name="btnAdd" Click="btnAdd_Click">Добавить цветок</Button>
+            <Button x:Name="btnDelete" Click="btnDelete_Click">Удалить цветок</Button>
+            <Button x:Name="btnEdit" Click="btnEdit_Click">Редактировать цветок</Button> 
+        </StackPanel>
+    </Grid>
+      
+</Window>
